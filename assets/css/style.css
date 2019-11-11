@@ -25,6 +25,12 @@ body {
 
  
 }
+#startButton{
+    background: darkblue;
+    color: white;
+    width: 50%;
+    margin-top: 30%;
+}
 /* #timeRemaining{
     font-size: 45px;
     color: white;

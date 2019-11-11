@@ -16,31 +16,36 @@ $(document).ready(function() {
     var questionFive = {
         question: "The world's first sports cable channel was launched in Bristol, CT in 1979.  What was it called?",
         answer: ["ESPN", "FSN1", "CBSN", "MLBN"]};
-        var shuffle = ["retrr", "bank", "key", "issue"];
-        var timeRemaining = 15;
-        console.log(timeRemaining);
-      counterArray =["5","4","3","2","1"];
-            for (j=0; j<counterArray ;j++){
-       
-         console.log(counterArray[j]);
+    var timeRemaining = 15;
+  
+    function startGame(){
 
-                
-            console.log(j);
-            }
-            console.log(counterArray);
-            console.log(j);
-            // setInterval(function(){
-            //     ("#timeRemaining") .text(timeRemaining-(timeRemaining-j)); }, 1000);
+    
+        setInterval(function(){
+            $("#timeRemaining").html("Time Remaining: " + timeRemaining + " seconds<br>");
+            
+            timeRemaining--;
+        }, 1000);
+              
           
-        
+    
           
-
-        $("#timeRemaining").append("Time Remaining: " + timeRemaining + " seconds")
-    $(".question").append(questionOne.question);
-    for (i=0; i<questionOne.answer.length;i++){
-        $(".answer").append("<br>" + questionOne.answer[i]);
-    }
+  
+          
+            
+  
+      $(".question").append(questionOne.question);
+      for (i=0; i<questionOne.answer.length;i++){
+          $(".answer").append("<br>" + questionOne.answer[i]);
+      }
+     
+  }
+  
    
     
 
+    ("#startButton").on("click",function(){
+    startGame();
+    });
+    
     });
