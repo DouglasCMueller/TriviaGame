@@ -1,0 +1,41 @@
+body {
+  
+    font-family: Arial, Helvetica, sans-serif;
+}
+.jumbotron.jumbotron-fluid {
+    text-align: center;
+    padding: 10px;
+    background: green;
+    margin-top: 3%;
+}
+.display-4{
+    text-align: center;
+    color: white;
+}
+.container{
+    width: 90%;
+    height: 600px;
+    margin: auto;
+    padding: 0;
+    border: 5px solid black;
+    background: green;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+
+ 
+}
+/* #timeRemaining{
+    font-size: 45px;
+    color: white;
+}
+.question{
+    font-size: 45px;
+    color: white;
+}
+.answer{
+    font-size: 40px;
+    color: white;
+} */
+
+
