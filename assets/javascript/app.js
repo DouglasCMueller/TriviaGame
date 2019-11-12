@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    
+  
+   
     //Variables defined
     var questionOne = {
         question: "The third oldest institution of higher learning in the U.S. was established in New Haven, CT in 1701.  What is the name of this school?",
@@ -17,35 +18,74 @@ $(document).ready(function() {
         question: "The world's first sports cable channel was launched in Bristol, CT in 1979.  What was it called?",
         answer: ["ESPN", "FSN1", "CBSN", "MLBN"]};
     var timeRemaining = 15;
-  
-    function startGame(){
+    var correctAnswers = 0;
+    var incorrectAnswers = 0;
+    questionCounter = 1;
 
-    
+
         setInterval(function(){
-            $("#timeRemaining").html("Time Remaining: " + timeRemaining + " seconds<br>");
-            
-            timeRemaining--;
-        }, 1000);
-              
-          
     
-          
-  
+            if (timeRemaining>-1){
+            $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+           
+            
+            }
+                else {
+                    answerSet.add(answerSet[i]);
+                    $(".answer").append("<br>" + questionOne.answer[i]);
+             
+            }
           
             
-  
-      $(".question").append(questionOne.question);
-      for (i=0; i<questionOne.answer.length;i++){
-          $(".answer").append("<br>" + questionOne.answer[i]);
-      }
-     
-  }
-  
+        
+            timeRemaining--;
+            
+        }, 1000);
+        $(".question").append(questionOne.question);
+
+            
+            $("#answerOne").append("<br>" + questionOne.answer[0]);
+            $("#answerTwo").append("<br>" + questionOne.answer[1]);
+            $("#answerThree").append("<br>" + questionOne.answer[2]);
+            $("#answerFour").append("<br>" + questionOne.answer[3]);
+            $("#answerOne").on("click", function(){
+                timeRemaining = 15;
+                $(".question").empty();
+                $("#answerOne").empty();
+                $("#answerTwo").empty();
+                $("#answerThree").empty();
+                $("#answerFour").empty();
+
+                setInterval(function(){
+    
+                    if (timeRemaining>-1){
+                    $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+                   
+                    
+                    }
+                        else {
+                            answerSet.add(answerSet[i]);
+                            $(".answer").append("<br>" + questionOne.answer[i]);
+                     
+                    }
+                             
+                    timeRemaining--;
+                    
+                }, 2000);
+                $(".question").append(questionTwo.question);
+        
+                    
+                    $("#answerOne").append("<br>" + questionTwo.answer[0]);
+                    $("#answerTwo").append("<br>" + questionTwo.answer[1]);
+                    $("#answerThree").append("<br>" + questionTwo.answer[2]);
+                    $("#answerFour").append("<br>" + questionTwo.answer[3]);
+            })
+    //add first question to html
+   
    
     
+  
+    // ("#startButton").on("click",startGame());
+        
 
-    ("#startButton").on("click",function(){
-    startGame();
-    });
-    
     });

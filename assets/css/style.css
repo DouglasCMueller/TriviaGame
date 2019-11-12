@@ -25,11 +25,33 @@ body {
 
  
 }
+a:hover{
+    background: grey;
+}
+#answerOne{
+    
+    color: white;
+}
+
+#answerTwo{
+    color: white;
+}
+#answerThree{
+    color: white;
+}
+
+#answerFour{
+    color: white;
+}
+
+
+
+
 #startButton{
     background: darkblue;
     color: white;
     width: 50%;
-    margin-top: 30%;
+    margin-top: 20%;
 }
 /* #timeRemaining{
     font-size: 45px;
