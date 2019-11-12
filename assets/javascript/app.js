@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  
-   
+    
     //Variables defined
     var questionOne = {
         question: "The third oldest institution of higher learning in the U.S. was established in New Haven, CT in 1701.  What is the name of this school?",
@@ -17,75 +16,138 @@ $(document).ready(function() {
     var questionFive = {
         question: "The world's first sports cable channel was launched in Bristol, CT in 1979.  What was it called?",
         answer: ["ESPN", "FSN1", "CBSN", "MLBN"]};
-    var timeRemaining = 15;
+    var timeRemaining = 5;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
+    var unansweredQuestions = 0;
     questionCounter = 1;
+    function startScreen(){
 
+    }
+    function gameOver(){
 
-        setInterval(function(){
-    
-            if (timeRemaining>-1){
-            $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-           
-            
-            }
-                else {
-                    answerSet.add(answerSet[i]);
-                    $(".answer").append("<br>" + questionOne.answer[i]);
-             
-            }
-          
-            
-        
-            timeRemaining--;
-            
-        }, 1000);
+    }
+function startGame(){
+
+    $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+    //setting question counter to determine which question player is on
+    if (questionCounter === 1){
         $(".question").append(questionOne.question);
+        for (i=0; i<questionOne.answer.length; i++){
+        $("#answer").append("<br>" + questionOne.answer[i]);
+        };
+        setInterval(function(){
+        if (timeRemaining>0){
+            $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+            timeRemaining--;
+            }
+        else  {
+            questionCounter++;
+            unansweredQuestions++;
+            startGame();
+            }
+        }, 1000);
+    }
+   
+    if (questionCounter === 2){
+        timeRemaining = 5;
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        $(".question").empty();
+        $("#answer").empty();
+        $(".question").append(questionTwo.question);
+        for (j=0; j<questionTwo.answer.length; j++){
+        $("#answer").append("<br>" + questionTwo.answer[j]);
+        };
+        setInterval(function(){
+        if (timeRemaining>0){
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        timeRemaining--;
+        }
+        else {
+            questionCounter++;
+            unansweredQuestions++;
+            startGame();
+         }
+        }, 1000);
+    } 
+    if (questionCounter === 3){
+        timeRemaining = 5;
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        $(".question").empty();
+        $("#answer").empty();
+        $(".question").append(questionThree.question);
+        for (i=0; i<questionThree.answer.length; i++){
+        $("#answer").append("<br>" + questionThree.answer[i]);
+        };
+        setInterval(function(){
+        if (timeRemaining>0){
+        console.log(timeRemaining);
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        timeRemaining--;
+        }
+        else {
+            questionCounter++;
+            unansweredQuestions++;
+            startGame();
+         }
+        }, 1000);
+    } 
+    if (questionCounter === 4){
+        timeRemaining = 5;
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        $(".question").empty();
+        $("#answer").empty();
+        $(".question").append(questionFour.question);
+        for (i=0; i<questionFour.answer.length; i++){
+        $("#answer").append("<br>" + questionFour.answer[i]);
+        };
+        setInterval(function(){
+        if (timeRemaining>0){
+        console.log(timeRemaining);
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        timeRemaining--;
+        }
+        else {
+            questionCounter++;
+            unansweredQuestions++;
+            startGame();
+         }
+        }, 1000);
+    }        
+    if (questionCounter === 5){
+        timeRemaining = 5;
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        $(".question").empty();
+        $("#answer").empty();
+        $(".question").append(questionFive.question);
+        for (i=0; i<questionFive.answer.length; i++){
+        $("#answer").append("<br>" + questionFive.answer[i]);
+        };
+        setInterval(function(){
+        if (timeRemaining>0){
+        console.log(timeRemaining);
+        $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+        timeRemaining--;
+        }
+        else {
+            questionCounter++;
+            unansweredQuestions++;
+            console.log(unansweredQuestions);
+            startGame();
+         }
+        }, 1000);
+    }              
+    if (questionCounter >5){
+        gameOver();
+    }
+}   
 
+//   startGame();             
             
-            $("#answerOne").append("<br>" + questionOne.answer[0]);
-            $("#answerTwo").append("<br>" + questionOne.answer[1]);
-            $("#answerThree").append("<br>" + questionOne.answer[2]);
-            $("#answerFour").append("<br>" + questionOne.answer[3]);
-            $("#answerOne").on("click", function(){
-                timeRemaining = 15;
-                $(".question").empty();
-                $("#answerOne").empty();
-                $("#answerTwo").empty();
-                $("#answerThree").empty();
-                $("#answerFour").empty();
+("#startButton").on("click",startGame());      
 
-                setInterval(function(){
-    
-                    if (timeRemaining>-1){
-                    $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-                   
-                    
-                    }
-                        else {
-                            answerSet.add(answerSet[i]);
-                            $(".answer").append("<br>" + questionOne.answer[i]);
-                     
-                    }
-                             
-                    timeRemaining--;
-                    
-                }, 2000);
-                $(".question").append(questionTwo.question);
-        
-                    
-                    $("#answerOne").append("<br>" + questionTwo.answer[0]);
-                    $("#answerTwo").append("<br>" + questionTwo.answer[1]);
-                    $("#answerThree").append("<br>" + questionTwo.answer[2]);
-                    $("#answerFour").append("<br>" + questionTwo.answer[3]);
-            })
-    //add first question to html
-   
-   
-    
-  
-    // ("#startButton").on("click",startGame());
-        
 
-    });
+
+    
+
+});
