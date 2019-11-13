@@ -28,7 +28,7 @@ var questionArray =[ {
         correctAnswer: "ESPN",
         image: "assets/images/espnHeadquarters.jpg",}];
 
-    
+    var count = 15;
     var timeRemaining = 5;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
@@ -46,8 +46,21 @@ var questionArray =[ {
             $("#answerImage").attr("src", "assets/images/connecticutFlagWaving.gif")
                
      }
-
-if (questionCounter == 0){
+$("#startButton").click(function(){
+    $(this).hide();
+    counter = setInterval(timer, 1000);
+    displayGameQuestionsAndAnswers();
+});
+function timer(){
+    
+    count--;
+    if (count<=0){
+    clearInterval(counter);
+    return;
+    }
+    $("#timeRemaining").html("<br>Time Remaining: " + count + " seconds <br>");
+}
+function displayGameQuestionsAndAnswers() {
   
     $(".question").append(questionArray[questionCounter].question);
 
@@ -57,7 +70,7 @@ if (questionCounter == 0){
             answerButton.attr("data-indexValue",questionArray[questionCounter].answer[i]);
             $(".answer").append(answerButton);
      
-        }
+        }}
         $(".answer").on("click", "button", function(){
             var userChoice = ($(this).attr("data-indexValue"))
               
@@ -84,27 +97,19 @@ if (questionCounter == 0){
                     correctAnswers++;
             }
 });         
-}
-else {
-    gameOver();
+
     
-}
+
 
 
 });
 
-//     //defining start screen function
-//     // function startScreen(){
-//     //     $("#timeRemaining").empty();
-//     //     $(".question").empty();
-//     //     $("#answer").empty();
-//     // }
-//     //
+
 //     // define start game function
 // // function startGame(){
  
 
-// //     // $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
+// //     //
 // //     //setting question counter to determine which question player is on
 // //     if (questionCounter === 1){
     
