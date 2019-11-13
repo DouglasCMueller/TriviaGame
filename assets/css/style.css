@@ -6,7 +6,7 @@ body {
     text-align: center;
     padding: 10px;
     background: green;
-    margin-top: 3%;
+    margin-top: 1%;
 }
 .display-4{
     text-align: center;
@@ -25,27 +25,35 @@ body {
 
  
 }
-a:hover{
-    background: grey;
+.answer{
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
 }
-#answerOne{
+.answer button {
+background: green;
+border: 0;
+display: block;
+color: white;
+
+
+}
+
+.answer button:hover {
+    background-color: grey;
+  }
+
+#correctAnswerRevealed{
+    text-align: center;
+}
+#answerImage{
     
-    color: white;
+       
+        width:250px;
+        height:250px;
+      
+     
 }
-
-#answerTwo{
-    color: white;
-}
-#answerThree{
-    color: white;
-}
-
-#answerFour{
-    color: white;
-}
-
-
-
 
 #startButton{
     background: darkblue;
