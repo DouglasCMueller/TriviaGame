@@ -35,6 +35,7 @@ background: green;
 border: 0;
 display: block;
 color: white;
+text-align: center;
 
 
 }
@@ -46,13 +47,9 @@ color: white;
 #correctAnswerRevealed{
     text-align: center;
 }
-#answerImage{
-    
-       
-        width:250px;
-        height:250px;
-      
-     
+#answermage{
+    width:250px;
+    height:250px;
 }
 
 #startButton{

@@ -11,7 +11,7 @@ var questionArray =[ {
     question: "In 1901, the first law regulating the speed of a motor vehicle was imposed in Connecticut. What was the speed limit?",
     answer: ["12 mph", "22 mph", "32 mph", "42 mph"],
     correctAnswer:"12 mph",
-    image: "assets/images/speedLimitSign.jpg",},
+    image: "assets/images/12MphSpeedLimit.png",},
     {
     question: "The oldest public library in the U.S was established in 1771 in Connecticut.  What is the name of the library?",
     answer: ["The Scoville Memorial Library", "Hughes Memorial Library", "Ivoryton Library", "James Blackstone Memorial Library"],
@@ -27,51 +27,81 @@ var questionArray =[ {
     answer: ["ESPN", "FSN1", "CBSN", "MLBN"],
     correctAnswer: "ESPN",
     image: "assets/images/espnHeadquarters.jpg",}];
-
-    var count = 15;
-    var timeRemaining = 5;
+    var governorImage = "assets/images/nedLamont.jpg"
+var counter;
+    var time = 15;
+  
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var unansweredQuestions = 0;
     var questionCounter = 0;
-
+    //clear image border lines
+$("#answerImage").empty();
    // define game over function
 function gameOver(){
     $("#timeRemaining").empty();
+    $("#timeExpired").empty();
     $(".question").empty();
-    $("#answer").empty();
+    $(".answer").empty();
     $("#startButton").empty();
     $("#rightOrWrongGuess").empty();
     $("correctAnswerRevealed").empty();
-    $("#tfinalScreenDetails").append("<br>Correct Answers: " + correctAnswers);
-    $("#tfinalScreenDetails").append("<br>Incorrect Answers: " + incorrectAnswers);
-    $("#tfinalScreenDetails").append("<br>Unanswered Questions: " + unansweredQuestions);
-    $(".container").attr("color", "white");
-    $("#answerImage").attr("src", "assets/images/connecticutFlagWaving.gif")
-        
+    $("#answerImage").empty();
+    $("#finalScreenDetails").append("Correct Answers: " + correctAnswers + "<br>");
+    $("#finalScreenDetails").append("Incorrect Answers: " + incorrectAnswers + "<br>");
+    $("#finalScreenDetails").append("Unanswered Questions: " + unansweredQuestions + "<br><br>");
+    $("#finalScreenDetails").append("Congratulations for completing the quiz from Connecticut Governor Ned Lamont! <br>")
+    $("#answerImage").attr("src", governorImage)
+    $("#answerImage").html(governorImage)
+  
 }
      //define start screen
+     function startScreen(){
     $("#startButton").click(function(){
+      //hide start button when clicked
     $(this).hide();
-    counter = setInterval(timer, 1000);
-    //call display game function
-    displayGameQuestionsAndAnswers();
-});
+   
+    //call display game function after start button clicked
+    setTimeout(displayGameQuestionsAndAnswers, 500);
+});}
 //define timer function
-function timer(){
-    count--;
-    if (count<=0){
-    clearInterval(counter);
-    }
-    $("#timeRemaining").html("<br>Time Remaining: " + count + " seconds <br>");
-   }
+// function timer(){
+    
+//     counter = setInterval(timer, 1000);
+//     function countdown() {
+//         if (time === 0){
+//             clearInterval(counter);
+//             userTimeExpired();
+//         }
+//         if (time > 0){
+//             time--;
+//         }
+//         $$("timeRemaining").html("Time Remaining: " + time );
+//         }
+//     }
+//    //define function for time expired
+//    function userTimeExpired() {
+//    if( time === 0){
+// unansweredQuestions++;
+// $("timeExpired").text("Your time ran out!")
+// displayGameQuestionsAndAnswers();
+//    }}
+   //define function for displaying questions and answers
 function displayGameQuestionsAndAnswers() {  
-    if (questionCounter > 4) {
+    $("#rightOrWrongGuess").empty();
+    $("#correctAnswerRevealed").empty();
+    $("#answerImage").attr('src', '');
+    $("#answerImage").empty();
+
+//after 5 questions game over
+    if (questionCounter === 5) {
         gameOver();
     }
-    
+    //start timer
+// timer();
+//show question
     $(".question").append(questionArray[questionCounter].question);
-   
+   //create clickable answers
     for (i=0; i<questionArray[questionCounter].answer.length; i++){
     var answerButton = $("<button>");
     answerButton.text(questionArray[questionCounter].answer[i]);
@@ -79,181 +109,54 @@ function displayGameQuestionsAndAnswers() {
     $(".answer").append(answerButton);
     }
     }
+    //user clicks on an answer
     $(".answer").on("click", "button", function(){
         var userChoice = ($(this).attr("data-indexValue"))
-        
-    
+//user correctly guesses
     if(userChoice == questionArray[questionCounter].correctAnswer){
-        
-        
-    $("#timeRemaining").empty();
-    $(".question").empty();
-
-    $("#startButton").empty();
+        $("#timeRemaining").empty();
+        $("#timeExpired").empty();
+        $(".question").empty();
         $(".answer").empty();
-        $("#rightOrWrongGuess").append("Correct!")
-        $("#correctAnswerRevealed").append(questionArray[questionCounter].correctAnswer)
+        $("#startButton").empty();
+        $("#rightOrWrongGuess").empty();
+        $("correctAnswerRevealed").empty();
+        $("#answerImage").empty();
+        $("#rightOrWrongGuess").html("Correct!")
+        $("#correctAnswerRevealed").html(questionArray[questionCounter].correctAnswer)
         $("#answerImage").attr("src", questionArray[questionCounter].image)
-        $("#answerImage").append(questionArray[questionCounter].image)
+        $("#answerImage").html(questionArray[questionCounter].image)
         clearInterval(counter);
         questionCounter++;
         correctAnswers++;
-        displayGameQuestionsAndAnswers();
-
+        count=15;
+        setTimeout(displayGameQuestionsAndAnswers, 2000);
     }
     else if (userChoice !== questionArray[questionCounter].correctAnswer) {
-
         $("#timeRemaining").empty();
+        $("#timeExpired").empty();
         $(".question").empty();
-    
+        $(".answer").empty();
         $("#startButton").empty();
-            $(".answer").empty();
-            $("#rightOrWrongGuess").append("Incorrect!")
-            $("#correctAnswerRevealed").append(questionArray[questionCounter].correctAnswer)
-            $("#answerImage").attr("src", questionArray[questionCounter].image)
-            $("#answerImage").append(questionArray[questionCounter].image)
-            clearInterval(counter);
-            questionCounter++;
-            incorrectAnswers++;
-            displayGameQuestionsAndAnswers();
+        $("#rightOrWrongGuess").empty();
+        $("correctAnswerRevealed").empty();
+        $("#answerImage").empty();
+        $("#rightOrWrongGuess").append("Incorrect!")
+        $("#correctAnswerRevealed").append("The right answer was " + questionArray[questionCounter].correctAnswer)
+        $("#answerImage").attr("src", questionArray[questionCounter].image)
+        $("#answerImage").append(questionArray[questionCounter].image)
+        clearInterval(counter);
+        count=15;
+        questionCounter++;
+        incorrectAnswers++;
+
+        setTimeout(displayGameQuestionsAndAnswers, 2000);
 }
-});         
-
-    
-
-
-
+});    
+startScreen();     
 });
 
 
-//     // define start game function
-// // function startGame(){
- 
-
-// //     //
-// //     //setting question counter to determine which question player is on
-// //     if (questionCounter === 1){
-    
-// //         $("#answer").append("<br>" + questionOne.answer[i]);
-   
-// //         };
-// //         setInterval(() => {
-// //         if (timeRemaining>0){
-// //             $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //             timeRemaining--;
-// //             }
-// //         else  {
-       
-         
-// //             questionCounter++;
-// //             unansweredQuestions++;
-          
-// //             startGame();
-// //             }
-// //         }, 1000);
-    
-   
-// //     else if (questionCounter === 2){
-// //         timeRemaining = 5;
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         $(".question").empty();
-// //         $("#answer").empty();
-// //         $(".question").append(questionTwo.question);
-// //         for (j=0; j<questionTwo.answer.length; j++){
-// //             $("#answer").append("<br>" + questionTwo.answer[i]);
-     
-// //         };
-// //         setInterval(function(){
-// //         if (timeRemaining>0){
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         timeRemaining--;
-// //         }
-// //         else {
-// //             questionCounter++;
-// //             unansweredQuestions++;
-            
-// //             startGame();
-// //          }
-// //         }, 1000);
-// //     } 
-// //     else if (questionCounter === 3){
-// //         timeRemaining = 5;
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         $(".question").empty();
-// //         $("#answer").empty();
-// //         $(".question").append(questionThree.question);
-// //         for (i=0; i<questionThree.answer.length; i++){
-// //             $("#answer").html("<br>" + questionThree.answer[i]);
-           
-// //         };
-// //         setInterval(function(){
-// //         if (timeRemaining>0){
-// //         console.log(timeRemaining);
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         timeRemaining--;
-// //         }
-// //         else {
-// //             questionCounter++;
-// //             unansweredQuestions++;
-// //             startGame();
-// //          }
-// //         }, 1000);
-// //     } 
-// //     else if (questionCounter === 4){
-// //         timeRemaining = 5;
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         $(".question").empty();
-// //         $("#answer").empty();
-// //         $(".question").append(questionFour.question);
-// //         for (i=0; i<questionFour.answer.length; i++){
-// //             $("#answer").html("<br>" + questionFour.answer[i]);
-     
-// //         };
-// //         setInterval(function(){
-// //         if (timeRemaining>0){
-// //         console.log(timeRemaining);
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         timeRemaining--;
-// //         }
-// //         else {
-// //             questionCounter++;
-// //             unansweredQuestions++;
-// //             startGame();
-// //          }
-// //         }, 1000);
-// //     }        
-// //     else if (questionCounter === 5){
-// //         timeRemaining = 5;
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         $(".question").empty();
-// //         $("#answer").empty();
-// //         $(".question").append(questionFive.question);
-// //         for (i=0; i<questionFive.answer.length; i++){
-// //         $("#answer").append("<br>" + questionFive.answer[i]);
-// //         };
-// //         setInterval(function(){
-// //         if (timeRemaining>0){
-// //         console.log(timeRemaining);
-// //         $("#timeRemaining").html("<br>Time Remaining: " + timeRemaining + " seconds <br><br>");
-// //         timeRemaining--;
-// //         }
-// //         else {
-// //             questionCounter++;
-// //             unansweredQuestions++;
-// //             console.log(unansweredQuestions);
-// //             startGame();
-// //          }
-// //         }, 1000);
-// //     }              
-// //     else{
-// //         gameOver();
-// //     }
-// // }
-
-    
-// // // startScreen();      
-            
-// // // ("#startButton").on("click",startGame());      
 
 
 
