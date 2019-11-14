@@ -25,6 +25,9 @@ body {
 
  
 }
+#timeRemaining {
+    color: lightblue;
+}
 .answer{
   display: inline-block;
   text-align: center;
@@ -48,8 +51,8 @@ text-align: center;
     text-align: center;
 }
 #answermage{
-    width:250px;
-    height:250px;
+    width:300px;
+    height:300px;
 }
 
 #startButton{
@@ -58,17 +61,6 @@ text-align: center;
     width: 50%;
     margin-top: 20%;
 }
-/* #timeRemaining{
-    font-size: 45px;
-    color: white;
-}
-.question{
-    font-size: 45px;
-    color: white;
-}
-.answer{
-    font-size: 40px;
-    color: white;
-} */
+
 
 

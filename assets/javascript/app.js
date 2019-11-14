@@ -9,12 +9,12 @@ var questionArray =[ {
     image: "assets/images/yaleUniversity.jpg",},
     {
     question: "In 1901, the first law regulating the speed of a motor vehicle was imposed in Connecticut. What was the speed limit?",
-    answer: ["12 mph", "22 mph", "32 mph", "42 mph"],
+    answer: ["42 mph", "32 mph", "22 mph", "12 mph"],
     correctAnswer:"12 mph",
     image: "assets/images/12MphSpeedLimit.png",},
     {
     question: "The oldest public library in the U.S was established in 1771 in Connecticut.  What is the name of the library?",
-    answer: ["The Scoville Memorial Library", "Hughes Memorial Library", "Ivoryton Library", "James Blackstone Memorial Library"],
+    answer: [ "Ivoryton Library", "James Blackstone Memorial Library", "The Scoville Memorial Library", "Hughes Memorial Library"],
     correctAnswer: ["The Scoville Memorial Library"],
     image: "assets/images/scofieldLibrary.jpg",},
     question = {
@@ -24,12 +24,13 @@ var questionArray =[ {
     image: "assets/images/louisLunch.jpg",},
     question = {
     question: "The world's first sports cable channel was launched in Bristol, CT in 1979.  What was it called?",
-    answer: ["ESPN", "FSN1", "CBSN", "MLBN"],
+    answer: ["CBSN", "ESPN", "FSN1",  "MLBN"],
     correctAnswer: "ESPN",
     image: "assets/images/espnHeadquarters.jpg",}];
     var governorImage = "assets/images/nedLamont.jpg"
-var counter;
-    var time = 15;
+    // var counter;
+     var time = 15;
+     var clock;
   
     var correctAnswers = 0;
     var incorrectAnswers = 0;
@@ -37,8 +38,31 @@ var counter;
     var questionCounter = 0;
     //clear image border lines
 $("#answerImage").empty();
-   // define game over function
-function gameOver(){
+//define start screen
+function startScreen(){
+    $("#startButton").click(function(){
+        //hide start button when clicked
+    $(this).hide();
+    // counter = setInterval(timer, 1000);
+    //call display game function after start button clicked
+    setTimeout(displayGameQuestionsAndAnswers, 500);
+});}
+//define timer function
+function timer(){
+    clock = setInterval(countdown,1000)
+    function countdown(){
+    if (time> 0){
+        time--;
+        $("#timeRemaining").html("<br> Time Remaining " + time);
+    }
+    else if  (time===0){
+        clearInterval(clock);
+        userTimeExpired();
+    }
+}
+};
+//define user time expired
+function userTimeExpired (){
     $("#timeRemaining").empty();
     $("#timeExpired").empty();
     $(".question").empty();
@@ -47,59 +71,52 @@ function gameOver(){
     $("#rightOrWrongGuess").empty();
     $("correctAnswerRevealed").empty();
     $("#answerImage").empty();
-    $("#finalScreenDetails").append("Correct Answers: " + correctAnswers + "<br>");
-    $("#finalScreenDetails").append("Incorrect Answers: " + incorrectAnswers + "<br>");
-    $("#finalScreenDetails").append("Unanswered Questions: " + unansweredQuestions + "<br><br>");
-    $("#finalScreenDetails").append("Congratulations for completing the quiz from Connecticut Governor Ned Lamont! <br>")
-    $("#answerImage").attr("src", governorImage)
-    $("#answerImage").html(governorImage)
+    $("#rightOrWrongGuess").append("Your Time Expired!")
+    $("#correctAnswerRevealed").append("The correct answer was " + questionArray[questionCounter].correctAnswer)
+    $("#answerImage").attr("src", questionArray[questionCounter].image)
+    $("#answerImage").append(questionArray[questionCounter].image)
+    clearInterval(clock);
+    count=15;
+    questionCounter++;
+    unansweredQuestions++;
+    setTimeout(displayGameQuestionsAndAnswers, 2000);
+}
+   // define game over function
+function gameOver(){
+    clearInterval(clock);
+    $("#timeRemaining").empty();
+    $("#timeExpired").empty();
+    $(".question").empty();
+    $(".answer").empty();
+    $("#startButton").empty();
+    $("#rightOrWrongGuess").empty();
+    $("correctAnswerRevealed").empty();
+    $("#answerImage").empty();
+    $(".question").append("Correct Answers: " + correctAnswers + "<br>");
+    $(".question").append("Incorrect Answers: " + incorrectAnswers + "<br>");
+    $(".question").append("Unanswered Questions: " + unansweredQuestions + "<br><br>");
+    $(".question").append("Congratulations for completing the quiz from Connecticut Governor Ned Lamont! <br>");
+    $("#answerImage").attr("src", governorImage);
+    $("#answerImage").html(governorImage);
   
 }
-     //define start screen
-     function startScreen(){
-    $("#startButton").click(function(){
-      //hide start button when clicked
-    $(this).hide();
-   
-    //call display game function after start button clicked
-    setTimeout(displayGameQuestionsAndAnswers, 500);
-});}
-//define timer function
-// function timer(){
-    
-//     counter = setInterval(timer, 1000);
-//     function countdown() {
-//         if (time === 0){
-//             clearInterval(counter);
-//             userTimeExpired();
-//         }
-//         if (time > 0){
-//             time--;
-//         }
-//         $$("timeRemaining").html("Time Remaining: " + time );
-//         }
-//     }
-//    //define function for time expired
-//    function userTimeExpired() {
-//    if( time === 0){
-// unansweredQuestions++;
-// $("timeExpired").text("Your time ran out!")
-// displayGameQuestionsAndAnswers();
-//    }}
-   //define function for displaying questions and answers
+   //game start with questions and answers displayed
 function displayGameQuestionsAndAnswers() {  
     $("#rightOrWrongGuess").empty();
     $("#correctAnswerRevealed").empty();
-    $("#answerImage").attr('src', '');
+    $("#answerImage").attr("src", "");
     $("#answerImage").empty();
+    time = 15;
+    $("#timeRemaining").html("<br> Time Remaining: " + time);
+  //start timer
+timer();
 
 //after 5 questions game over
     if (questionCounter === 5) {
+      
         gameOver();
     }
-    //start timer
-// timer();
-//show question
+    //show question
     $(".question").append(questionArray[questionCounter].question);
    //create clickable answers
     for (i=0; i<questionArray[questionCounter].answer.length; i++){
@@ -126,12 +143,13 @@ function displayGameQuestionsAndAnswers() {
         $("#correctAnswerRevealed").html(questionArray[questionCounter].correctAnswer)
         $("#answerImage").attr("src", questionArray[questionCounter].image)
         $("#answerImage").html(questionArray[questionCounter].image)
-        clearInterval(counter);
+        clearInterval(clock);
         questionCounter++;
         correctAnswers++;
-        count=15;
+        time=15;
         setTimeout(displayGameQuestionsAndAnswers, 2000);
     }
+    //user guesses incorrectly
     else if (userChoice !== questionArray[questionCounter].correctAnswer) {
         $("#timeRemaining").empty();
         $("#timeExpired").empty();
@@ -142,14 +160,13 @@ function displayGameQuestionsAndAnswers() {
         $("correctAnswerRevealed").empty();
         $("#answerImage").empty();
         $("#rightOrWrongGuess").append("Incorrect!")
-        $("#correctAnswerRevealed").append("The right answer was " + questionArray[questionCounter].correctAnswer)
+        $("#correctAnswerRevealed").append("The correct answer was " + questionArray[questionCounter].correctAnswer)
         $("#answerImage").attr("src", questionArray[questionCounter].image)
         $("#answerImage").append(questionArray[questionCounter].image)
-        clearInterval(counter);
-        count=15;
+        clearInterval(clock);
+        time=15;
         questionCounter++;
         incorrectAnswers++;
-
         setTimeout(displayGameQuestionsAndAnswers, 2000);
 }
 });    
