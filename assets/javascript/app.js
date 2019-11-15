@@ -17,31 +17,43 @@ var questionArray =[ {
     answer: [ "Ivoryton Library", "James Blackstone Memorial Library", "The Scoville Memorial Library", "Hughes Memorial Library"],
     correctAnswer: ["The Scoville Memorial Library"],
     image: "assets/images/scofieldLibrary.jpg",},
-    question = {
+    {
     question: "The first hamburger in the United States was made in Connecticut.  Where?",
     answer: ["Louis' Lunch", "Shake Shack", "Elm Diner", "Route 80 Cafe"],
     correctAnswer:"Louis' Lunch",
     image: "assets/images/louisLunch.jpg",},
-    question = {
+    {
     question: "The world's first sports cable channel was launched in Bristol, CT in 1979.  What was it called?",
     answer: ["CBSN", "ESPN", "FSN1",  "MLBN"],
     correctAnswer: "ESPN",
     image: "assets/images/espnHeadquarters.jpg",}];
     var governorImage = "assets/images/nedLamont.jpg"
     // var counter;
-     var time = 15;
-     var clock;
-  
+    var time = 15;
+    var clock;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var unansweredQuestions = 0;
     var questionCounter = 0;
+//attempt to create random answers per question
+    // var questionArrayWithAnswersRandom =[ {
+    //     question: "The third oldest institution of higher learning in the U.S. was established in New Haven, CT in 1701.  What is the name of this school?",
+    //     answer: ["Yale University", "Harvard University", "Brown University", "Colby College"],
+    //     correctAnswer:"Yale University",
+    //     image: "assets/images/yaleUniversity.jpg",},
+    //     ]
+    //     console.log(questionArrayWithAnswersRandom[0].answer[0]); 
+    //             for (m=0;m<10;m++){
+    //         var newAnswerSet = Set ([questionArrayWithAnswersRandom[m].answer[m]]);
+    //         console.log(newAnswerSet);
+    //     }
+
     //clear image border lines
 $("#answerImage").empty();
 //define start screen
 function startScreen(){
     $("#startButton").click(function(){
-        //hide start button when clicked
+    //hide start button when clicked
     $(this).hide();
     // counter = setInterval(timer, 1000);
     //call display game function after start button clicked
@@ -76,7 +88,7 @@ function userTimeExpired (){
     $("#answerImage").attr("src", questionArray[questionCounter].image)
     $("#answerImage").append(questionArray[questionCounter].image)
     clearInterval(clock);
-    count=15;
+    time=15;
     questionCounter++;
     unansweredQuestions++;
     setTimeout(displayGameQuestionsAndAnswers, 2000);
@@ -98,7 +110,8 @@ function gameOver(){
     $(".question").append("Congratulations for completing the quiz from Connecticut Governor Ned Lamont! <br>");
     $("#answerImage").attr("src", governorImage);
     $("#answerImage").html(governorImage);
-  
+    setTimeout(startScreen, 4000);
+   
 }
    //game start with questions and answers displayed
 function displayGameQuestionsAndAnswers() {  
@@ -113,8 +126,7 @@ timer();
 
 //after 5 questions game over
     if (questionCounter === 5) {
-      
-        gameOver();
+      gameOver();
     }
     //show question
     $(".question").append(questionArray[questionCounter].question);
@@ -169,7 +181,8 @@ timer();
         incorrectAnswers++;
         setTimeout(displayGameQuestionsAndAnswers, 2000);
 }
-});    
+});  
+//initiate start screen  
 startScreen();     
 });
 
